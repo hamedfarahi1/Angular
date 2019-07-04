@@ -1,1 +1,5 @@
-<button (click)="getJSONes()">{{Message}}</button>
+<div>
+    <li *ngFor="let menu of Menu">
+        <span>{{menu.id}}     {{menu.name}}     {{menu.price}}</span>
+    </li>
+</div>
