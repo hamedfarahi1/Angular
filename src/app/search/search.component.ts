@@ -23,21 +23,11 @@ export class SearchComponent implements OnInit {
   onKey(event: any) {
     this.food.SubName = event;
     this.food.LessThanPrice = event;
-  }
-
-  get_resultByName() {
-    this.food.SearchOption = 1;
-    console.log(this.food);
-    console.log(
-      this.http
-        .post("http://localhost:8080/api/Search", this.food)
-        .subscribe(res => {
-          this.foods = res["Menu"];
-        })
-    );
-  }
-  get_resultByPrice() {
-    this.food.SearchOption = 0;
+    if (+event == event) {
+      this.food.SearchOption = 0;
+    } else {
+      this.food.SearchOption = 1;
+    }
     console.log(this.food);
     console.log(
       this.http

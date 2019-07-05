@@ -9,9 +9,12 @@ import { AlertModule } from "ngx-bootstrap";
 import { FormsModule } from "@angular/forms";
 import { ResultComponent } from './result/result.component';
 import { CreateComponent } from './create/create.component';
+import { UpdateComponent } from './update/update.component';
+import { UpdateNameComponent } from './update-name/update-name.component';
+import { UpdatePriceComponent } from './update-price/update-price.component';
 
 @NgModule({
-  declarations: [AppComponent, SearchComponent, MenuComponent, ResultComponent, CreateComponent],
+  declarations: [AppComponent, SearchComponent, MenuComponent, ResultComponent, CreateComponent, UpdateComponent, UpdateNameComponent, UpdatePriceComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
