@@ -8,9 +8,10 @@ import { MenuComponent } from "./menu/menu.component";
 import { AlertModule } from "ngx-bootstrap";
 import { FormsModule } from "@angular/forms";
 import { ResultComponent } from './result/result.component';
+import { CreateComponent } from './create/create.component';
 
 @NgModule({
-  declarations: [AppComponent, SearchComponent, MenuComponent, ResultComponent],
+  declarations: [AppComponent, SearchComponent, MenuComponent, ResultComponent, CreateComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
