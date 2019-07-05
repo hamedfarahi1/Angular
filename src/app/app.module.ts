@@ -6,6 +6,7 @@ import { SearchComponent } from "./search/search.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { MenuComponent } from "./menu/menu.component";
 import { AlertModule } from "ngx-bootstrap";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [AppComponent, SearchComponent, MenuComponent],
@@ -13,7 +14,8 @@ import { AlertModule } from "ngx-bootstrap";
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
