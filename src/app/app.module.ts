@@ -7,9 +7,10 @@ import { AppRoutingModule } from "./app-routing.module";
 import { MenuComponent } from "./menu/menu.component";
 import { AlertModule } from "ngx-bootstrap";
 import { FormsModule } from "@angular/forms";
+import { ResultComponent } from './result/result.component';
 
 @NgModule({
-  declarations: [AppComponent, SearchComponent, MenuComponent],
+  declarations: [AppComponent, SearchComponent, MenuComponent, ResultComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

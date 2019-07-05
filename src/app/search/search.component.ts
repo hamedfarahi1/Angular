@@ -2,6 +2,7 @@ import { SearchFood } from "./../SearchFood";
 import { Food } from "../Food";
 import { Component, OnInit, Input } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { SearchResult } from "../SearchResult";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "text/plain;charset=UTF-8" })
@@ -20,10 +21,13 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {}
   onKey(event: any) {
-    this.food.SubName = event.target.value;
+    this.food.SubName = event;
+    this.food.LessThanPrice = event;
   }
-  get_result() {
+
+  get_resultByName() {
     this.food.SearchOption = 1;
+    console.log(this.food);
     console.log(
       this.http
         .post("http://localhost:8080/api/Search", this.food)
@@ -31,6 +35,16 @@ export class SearchComponent implements OnInit {
           this.foods = res["Menu"];
         })
     );
-    console.log(this.foods);
+  }
+  get_resultByPrice() {
+    this.food.SearchOption = 0;
+    console.log(this.food);
+    console.log(
+      this.http
+        .post("http://localhost:8080/api/Search", this.food)
+        .subscribe(res => {
+          this.foods = res["Menu"];
+        })
+    );
   }
 }

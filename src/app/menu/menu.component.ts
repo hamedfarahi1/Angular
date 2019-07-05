@@ -26,7 +26,6 @@ export class MenuComponent implements OnInit {
         .get<string>("http://localhost:8080/api/Menu", httpOptions)
         .subscribe(res => {
           this.Menu = res["Menu"];
-          console.log(this.Menu[0].name);
         })
     );
   }
