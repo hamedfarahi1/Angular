@@ -12,9 +12,10 @@ import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { UpdateNameComponent } from './update-name/update-name.component';
 import { UpdatePriceComponent } from './update-price/update-price.component';
+import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
-  declarations: [AppComponent, SearchComponent, MenuComponent, ResultComponent, CreateComponent, UpdateComponent, UpdateNameComponent, UpdatePriceComponent],
+  declarations: [AppComponent, SearchComponent, MenuComponent, ResultComponent, CreateComponent, UpdateComponent, UpdateNameComponent, UpdatePriceComponent, DeleteComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

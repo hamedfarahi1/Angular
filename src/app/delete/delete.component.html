@@ -1,0 +1,33 @@
+<div style="margin-left: 35%; margin-top:100px; align-items: center">
+    <label for="inp" class="inp">
+    <input
+      (input)="onKeyName($event.target.value)"
+      type="text"
+      id="inp"
+      placeholder="&nbsp;"
+    />
+    <span class="label">{{ idName }}</span>
+    <span class="border"></span>
+  </label>
+    <div class="navbar">
+        <div class="dropdown">
+            <button class="dropbtn">
+        Delete With {{ id }}
+        <i class="fa fa-caret-down"></i>
+      </button>
+            <div class="dropdown-content">
+                <button (click)="deleteById()" class="button" style="width: 200px">
+          ID
+        </button>
+                <button (click)="deleteByName()" class="button" style="margin-left: 20px;width: 200px">
+          Name
+        </button>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:50px; align-items: center">
+        <button style=" width: 420px; height: 50px; " class="button" (click)="delete()">
+      Delete Food
+    </button>
+    </div>
+</div>
