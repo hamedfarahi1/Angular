@@ -1,4 +1,4 @@
-<div style="margin-top: 50px; width: 30%; margin-left: 35%">
+<div style="margin-top: 50px; width: 30%; margin-left: 35%; ">
     <label for="inp" class="inp">
     <input
       (input)="onKeyName($event.target.value)"
@@ -6,7 +6,7 @@
       id="inp"
       placeholder="&nbsp;"
     />
-    <span class="label">{{ idName }}</span>
+    <span class="label">{{ updateFood.NewName }}</span>
     <span class="border"></span>
   </label>
     <label for="inp" class="inp">
@@ -16,11 +16,11 @@
       id="inp"
       placeholder="&nbsp;"
     />
-    <span class="label">New Name</span>
+    <span class="label">{{ updateFood.NewPrice }}</span>
     <span class="border"></span>
   </label>
 
-    <button (click)="updateFoodInfo()" style="margin-top: 60px;width: 100%; height: 60px;" class="button">
+    <button [routerLink]="['/']" (click)="updateFoodInfo()" style="margin-top: 60px;width: 100%; height: 60px;" class="button">
     {{ Message }}
   </button>
 </div>

@@ -9,36 +9,28 @@ import { HttpClient } from "@angular/common/http";
 })
 export class UpdateNameComponent implements OnInit {
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
-  updatFood: UpdateFood = new UpdateFood();
+  updateFood: UpdateFood = new UpdateFood();
   Message = "Update";
   idName = "ID";
   onKeyName(event: any) {
-    this.updatFood.Name = event;
-    this.updatFood.Id = +event;
-
-    console.log(this.updatFood.Name);
+    this.updateFood.NewName = event;
   }
   onKeyNewName(event: any) {
-    this.updatFood.NewName = event;
-    console.log(this.updatFood.NewName);
+    this.updateFood.NewPrice = event;
   }
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.updatFood.GetBy = params["getBy"];
-      console.log(params["getBy"]);
+      this.updateFood.GetBy = 1;
+      this.updateFood.NewName = params["name"];
+      this.updateFood.NewPrice = params["price"];
+      this.updateFood.Id = params["id"];
     });
-    if (this.updatFood.GetBy == 0) {
-      this.idName = "Name";
-    } else if (this.updatFood.GetBy == 1) {
-      this.idName = "ID";
-    }
   }
   updateFoodInfo() {
-    this.updatFood.NewPrice = "N";
-    console.log(this.updatFood);
+    console.log(this.updateFood);
     console.log(
       this.http
-        .post("http://localhost:8080/api/Update", this.updatFood)
+        .post("http://localhost:8080/api/Update", this.updateFood)
         .subscribe(res => {
           console.log(res);
         })

@@ -1,3 +1,4 @@
+import { FoodMenuComponent } from "./food-menu/food-menu.component";
 import { UpdatePriceComponent } from "./update-price/update-price.component";
 import { UpdateNameComponent } from "./update-name/update-name.component";
 import { UpdateComponent } from "./update/update.component";
@@ -11,7 +12,7 @@ import { DeleteComponent } from "./delete/delete.component";
 const routes: Routes = [
   { path: "search", component: SearchComponent },
   { path: "menu", component: MenuComponent },
-  { path: "", redirectTo: "", pathMatch: "full" },
+  { path: "", component: FoodMenuComponent },
   { path: "create", component: CreateComponent },
   { path: "update", component: UpdateComponent },
   {
