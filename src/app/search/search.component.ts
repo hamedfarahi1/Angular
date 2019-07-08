@@ -1,8 +1,7 @@
 import { SearchFood } from "./../SearchFood";
 import { Food } from "../Food";
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { SearchResult } from "../SearchResult";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "text/plain;charset=UTF-8" })

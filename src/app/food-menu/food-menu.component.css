@@ -117,13 +117,14 @@ iframe {
     display: -ms-flexbox;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     flex-wrap: wrap;
     padding: 33px 30px;
 }
 
 .wrap-table100 {
     width: 960px;
+    margin-left: 40px;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -278,4 +279,14 @@ iframe {
 
 .btn4 {
     margin-left: 15px;
+}
+
+.img1 {
+    align-self: auto;
+    margin-top: 2%;
+    margin-left: 40px;
+    width: 400px;
+    height: 500px;
+    background-color: #6c7ae0;
+    border-radius: 10px;
 }

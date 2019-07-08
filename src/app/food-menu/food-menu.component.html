@@ -25,7 +25,7 @@
                             </div>
                         </div>
 
-                        <div *ngFor="let menu of Menu" class="row">
+                        <div *ngFor="let menu of Menu" class="row" (click)="selectedItem(menu.imageUrl)">
                             <div class="cell" data-title="Name">
                                 {{ menu.name }}
                             </div>
@@ -49,6 +49,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="img1">
+                    <app-food-image [imageUrl]="imageUrl"></app-food-image>
                 </div>
             </div>
         </div>

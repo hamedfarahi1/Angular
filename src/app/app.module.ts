@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ToastrModule } from "ngx-toastr";
 import { SearchDialogComponent } from "./search-dialog/search-dialog.component";
+import { FoodImageComponent } from './food-image/food-image.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SearchDialogComponent } from "./search-dialog/search-dialog.component";
 
     DeleteComponent,
     FoodMenuComponent,
-    SearchDialogComponent
+    SearchDialogComponent,
+    FoodImageComponent
   ],
   imports: [
     MatDialogModule,
@@ -40,6 +42,6 @@ import { SearchDialogComponent } from "./search-dialog/search-dialog.component";
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DeleteComponent, SearchDialogComponent]
+  entryComponents: [DeleteComponent, SearchDialogComponent, FoodImageComponent]
 })
 export class AppModule {}

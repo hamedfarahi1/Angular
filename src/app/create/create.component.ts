@@ -1,7 +1,7 @@
 import { FoodService } from "./../foodService";
 import { Router } from "@angular/router";
 import { Food } from "./../Food";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import {HttpHeaders } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 
 const httpOptions = {

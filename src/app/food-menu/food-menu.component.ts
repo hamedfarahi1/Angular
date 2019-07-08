@@ -2,7 +2,7 @@ import { FoodService } from "./../foodService";
 import { UpdateFood } from "./../UpdateFood";
 import { DeleteComponent } from "./../delete/delete.component";
 import { Food } from "./../Food";
-import { Component, OnInit, Output } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { ToastrService } from "ngx-toastr";
 import { SearchDialogComponent } from "../search-dialog/search-dialog.component";
@@ -16,7 +16,7 @@ export class FoodMenuComponent implements OnInit {
   Menu: Food[];
   deleteFood: UpdateFood = new UpdateFood();
   deleteMessage: string;
-
+  imageUrl = "";
   constructor(
     private dialog: MatDialog,
     private toastr: ToastrService,
@@ -30,6 +30,9 @@ export class FoodMenuComponent implements OnInit {
     this.foodService.showMenu().subscribe(res => {
       this.Menu = res["Menu"];
     });
+  }
+  selectedItem(data: any) {
+    this.imageUrl = data;
   }
   openSearchDialog() {
     const dialogConfig = new MatDialogConfig();
