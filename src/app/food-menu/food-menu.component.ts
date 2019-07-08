@@ -1,8 +1,11 @@
+import { FoodService } from "./../foodService";
+import { UpdateFood } from "./../UpdateFood";
 import { DeleteComponent } from "./../delete/delete.component";
 import { Food } from "./../Food";
-import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output } from "@angular/core";
 import { MatDialog, MatDialogConfig } from "@angular/material";
+import { ToastrService } from "ngx-toastr";
+import { SearchDialogComponent } from "../search-dialog/search-dialog.component";
 
 @Component({
   selector: "app-food-menu",
@@ -10,29 +13,51 @@ import { MatDialog, MatDialogConfig } from "@angular/material";
   styleUrls: ["./food-menu.component.css"]
 })
 export class FoodMenuComponent implements OnInit {
-  Message: any;
-  ret: string;
   Menu: Food[];
-  constructor(private http: HttpClient, private dialog: MatDialog) {
-    this.Message = "Menu";
-    this.getJSONes();
-  }
-  ngOnInit() {}
+  deleteFood: UpdateFood = new UpdateFood();
+  deleteMessage: string;
 
-  /** GET JSONes from the server */
-  getJSONes() {
-    console.log(
-      this.http.get<string>("http://localhost:8080/api/Menu").subscribe(res => {
-        this.Menu = res["Menu"];
-      })
-    );
+  constructor(
+    private dialog: MatDialog,
+    private toastr: ToastrService,
+    private foodService: FoodService
+  ) {}
+  ngOnInit() {
+    this.reloadMenu();
   }
-  openDialog() {
+
+  reloadMenu() {
+    this.foodService.showMenu().subscribe(res => {
+      this.Menu = res["Menu"];
+    });
+  }
+  openSearchDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "400px";
+    dialogConfig.height = "300px";
+    const dialogRef = this.dialog.open(SearchDialogComponent);
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) this.Menu = data["Menu"];
+    });
+  }
+  openDeleteDialog(event: any) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-
-    this.dialog.open(DeleteComponent, dialogConfig);
+    dialogConfig.width = "400px";
+    dialogConfig.height = "200px";
+    this.deleteFood = event;
+    const dialogRef = this.dialog.open(DeleteComponent, dialogConfig);
+    dialogRef.componentInstance.data = this.deleteFood;
+    dialogRef.afterClosed().subscribe(data => {
+      this.deleteMessage = data;
+      if (data) {
+        this.reloadMenu();
+        this.toastr.success(this.deleteMessage, "Delete Message ");
+      }
+    });
   }
 }

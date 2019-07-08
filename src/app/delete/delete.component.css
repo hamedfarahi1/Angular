@@ -80,7 +80,7 @@
 .inp {
     position: relative;
     margin: auto;
-    width: 420px;
+    width: 30%;
 }
 
 .inp .label {
@@ -99,7 +99,7 @@
     bottom: 0;
     left: 0;
     height: 2px;
-    width: 420px;
+    width: 100%;
     background: #07f;
     transform: scaleX(0);
     transform-origin: 0 0;
@@ -108,7 +108,7 @@
 
 .inp input {
     -webkit-appearance: none;
-    width: 420px;
+    width: 100%;
     border: 0;
     font-family: inherit;
     padding: 12px 0;

@@ -1,34 +1,34 @@
+import { FoodService } from "./../foodService";
 import { UpdateFood } from "./../UpdateFood";
-import { ActivatedRoute } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
+import { MatDialogRef } from "@angular/material";
+
 @Component({
   selector: "app-delete",
   templateUrl: "./delete.component.html",
   styleUrls: ["./delete.component.css"]
 })
 export class DeleteComponent implements OnInit {
-  GetBy: number;
-  id = "ID";
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  @Input() data;
   updateFood: UpdateFood = new UpdateFood();
-  Message = "Update";
-  idName = "ID";
+  Message = "Delete Food";
+  DeleteMessage = "";
+
+  constructor(
+    private dialogRef: MatDialogRef<DeleteComponent>,
+    private foodeService: FoodService
+  ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.updateFood.GetBy = 1;
-      this.updateFood.Id = params["id"];
-    });
+    this.updateFood.Id = this.data.Id;
   }
   delete() {
-    console.log(this.updateFood);
-    console.log(
-      this.http
-        .post("http://localhost:8080/api/Delete", this.updateFood)
-        .subscribe(res => {
-          console.log(res);
-        })
-    );
+    this.foodeService.delete(this.updateFood).subscribe(res => {
+      this.dialogRef.close(this.DeleteMessage);
+      this.Message = "Deleted";
+    });
+  }
+  close() {
+    this.dialogRef.close();
   }
 }

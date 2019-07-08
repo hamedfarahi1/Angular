@@ -1,7 +1,7 @@
 <div style="margin-top: 50px; width: 30%; margin-left: 35%; ">
     <label for="inp" class="inp">
     <input
-      (input)="onKeyName($event.target.value)"
+      [(ngModel)]="this.updateFood.NewName"
       type="text"
       id="inp"
       placeholder="&nbsp;"
@@ -11,7 +11,7 @@
   </label>
     <label for="inp" class="inp">
     <input
-      (input)="onKeyNewName($event.target.value)"
+      [(ngModel)]="this.updateFood.NewPrice"
       type="text"
       id="inp"
       placeholder="&nbsp;"

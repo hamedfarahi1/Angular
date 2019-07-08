@@ -16,6 +16,12 @@
                             </div>
                             <div class="cell">
                                 ID
+                                <button [routerLink]="['/create']" class="btn3">
+                  Add Food
+                </button>
+                                <button (click)="openSearchDialog()" class="btn4">
+                  Search
+                </button>
                             </div>
                         </div>
 
@@ -32,16 +38,12 @@
                             <div class="cell" data-title="ID">
                                 {{ menu.id }}
 
-                                <button [routerLink]="['/delete']" [queryParams]="{
-                    id: menu.id
-                  }" class="btn1">
+                                <button (click)="openDeleteDialog(menu)" class="btn1">
                   Delete
                 </button>
                                 <button [routerLink]="['/update-name']" [queryParams]="{
-                    id: menu.id,
-                    name: menu.name,
-                    price: menu.price
-                  }" class="btn2">
+                    id: menu.id
+                  }" class="btn2" (click)="reloadMenu()">
                   Update
                 </button>
                             </div>

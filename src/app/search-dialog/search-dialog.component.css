@@ -1,3 +1,8 @@
+.div1 {
+    width: 400px;
+    height: 300px;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -71,7 +76,22 @@
 }
 
 .button {
+    margin-top: 60px;
     background-color: #0981b1;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.button1 {
+    margin-top: 60px;
+    margin-left: 15px;
+    background-color: #8f0808;
     /* Green */
     border: none;
     color: white;
