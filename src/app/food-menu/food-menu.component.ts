@@ -58,6 +58,7 @@ export class FoodMenuComponent implements OnInit {
         this.reloadMenu();
         this.toastr.success(this.deleteMessage, "Delete Message ");
       }
+      this.reloadMenu();
     });
   }
 }
