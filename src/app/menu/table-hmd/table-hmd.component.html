@@ -1,0 +1,38 @@
+<div class="wrap-table100">
+    <div class="table">
+        <div class="row header">
+            <div class="cell " *ngFor="let col of tableData1.columns" dir="ltl">
+                {{ col.label }}
+            </div>
+            <div class="cell " *ngIf="tableData1.actions && tableData1.actions.update" dir="ltl">
+                ویرایش
+            </div>
+            <div class="cell " *ngIf="tableData1.actions && tableData1.actions.delete" dir="mtl">
+                حذف کردن
+            </div>
+        </div>
+
+        <div *ngFor="let menu of tableData1.data" class="row" [routerLink]="['./detail', menu.id]">
+            <div class=" cell " [ngSwitch]="col.type" *ngFor="let col of tableData1.columns" data-title="col">
+                <p *ngSwitchCase="'number'">{{ menu[col.field] | number }}</p>
+                <p *ngSwitchCase="'KeyValue'">
+                    {{ menu[col.field] | getValue: col.pipeParam }}
+                </p>
+                <p *ngSwitchCase="'time'" dir="ltl">
+                    {{ menu[col.field] | getTime: col.format }}
+                </p>
+                <p *ngSwitchDefault>{{ menu[col.field] }}</p>
+            </div>
+            <div class="cell " *ngIf="tableData1.actions && tableData1.actions.update" dir="ltl">
+                <button [routerLink]="['./update', menu['id']]">
+          ویرایش
+        </button>
+            </div>
+            <div class="cell " *ngIf="tableData1.actions && tableData1.actions.update" dir="ltl">
+                <button [routerLink]="['./delete', menu['id']]">
+          حذف
+        </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div>
+    <div>
+        <div style="display: inline-grid">
+            <div>
+                <div class="div1">
+                    <label for="inp" class="inp">
+            <input
+              [(ngModel)]="searchBoxName"
+              type="text"
+              id="inp"
+              placeholder="&nbsp;"
+            />
+
+            <span class="label" *ngIf="!searchBoxName">Name</span>
+            <span class="border"></span>
+          </label>
+                    <label for="inp" class="inp">
+            <input
+              [(ngModel)]="searchBoxPrice"
+              type="text"
+              id="inp"
+              placeholder="&nbsp;"
+            />
+
+            <span class="label" *ngIf="!searchBoxPrice">Price</span>
+            <span class="border"></span>
+          </label>
+                </div>
+                <div style="display: inline-table">
+                    <button class="button" (click)="search()">Search</button>
+                    <button class="button" [routerLink]="['./create']">Add</button>
+                </div>
+            </div>
+            <div>
+                <div class="limiter">
+                    <div class="container-table100">
+                        <app-table-hmd [tableData1]="tableData"></app-table-hmd>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

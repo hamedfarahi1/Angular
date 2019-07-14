@@ -1,47 +1,27 @@
-import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from "./app.component";
-import { SearchComponent } from "./search/search.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AlertModule } from "ngx-bootstrap";
-import { FormsModule } from "@angular/forms";
-import { CreateComponent } from "./create/create.component";
-import { UpdateNameComponent } from "./update-name/update-name.component";
-import { DeleteComponent } from "./delete/delete.component";
-import { FoodMenuComponent } from "./food-menu/food-menu.component";
-import { MatDialogModule } from "@angular/material";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { ReactiveFormsModule } from "@angular/forms";
+import { BrowserModule } from "@angular/platform-browser";
+import { SharedModule } from "./Shared/shared.module";
+import { FoodModule } from "./food/food.module";
 import { ToastrModule } from "ngx-toastr";
-import { SearchDialogComponent } from "./search-dialog/search-dialog.component";
-import { FoodImageComponent } from './food-image/food-image.component';
+import { MenuModule } from "./menu/menu.module";
+import { ResturantModule } from './resturant/resturant.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SearchComponent,
-    CreateComponent,
-    UpdateNameComponent,
-
-    DeleteComponent,
-    FoodMenuComponent,
-    SearchDialogComponent,
-    FoodImageComponent
-  ],
+  declarations: [AppComponent],
   imports: [
-    MatDialogModule,
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
     AlertModule.forRoot(),
-    FormsModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    FoodModule,
+    SharedModule,
+    MenuModule,
+    ResturantModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [DeleteComponent, SearchDialogComponent, FoodImageComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
