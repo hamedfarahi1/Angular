@@ -1,22 +1,27 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { BrowserModule } from "@angular/platform-browser";
-import { HttpClientModule } from "@angular/common/http";
-import { FormsModule } from "@angular/forms";
-import { MatDialogModule } from "@angular/material";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { ReactiveFormsModule } from "@angular/forms";
-import { MatSelectModule } from "@angular/material/select";
-import { MatDatepickerModule } from "@angular/material/datepicker";
-import { getTimeValue } from "./getTime.pipe";
-import { MatNativeDateModule } from "@angular/material";
-import { MatFormFieldModule, MatInputModule } from "@angular/material";
-import { DpDatePickerModule } from "ng2-jalali-date-picker";
-import { Value } from "./ValuePipe.pipe";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { GetTimeValue } from './getTime.pipe';
+import { MatNativeDateModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { DpDatePickerModule } from 'ng2-jalali-date-picker';
+import { Value } from './ValuePipe.pipe';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 @NgModule({
-  declarations: [Value, getTimeValue],
-  imports: [],
-  providers: [MatDatepickerModule, FormData],
+  declarations: [Value, GetTimeValue],
+  imports: [CommonModule,
+    MatDialogModule,
+    BrowserModule,
+    FormsModule],
+  providers: [],
   exports: [
     CommonModule,
     MatDatepickerModule,
@@ -31,9 +36,10 @@ import { Value } from "./ValuePipe.pipe";
     FormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    getTimeValue,
+    GetTimeValue,
     Value,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule, MatDatepickerModule
   ]
 })
-export class SharedModule {}
+export class SharedModule { }

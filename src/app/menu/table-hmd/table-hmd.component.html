@@ -1,38 +1,49 @@
-<div class="wrap-table100">
-    <div class="table">
+<app-search-filter [columns]="tableData1.columns" (searched)="filter($event)"></app-search-filter>
+<button class="button" [routerLink]="['./create']">Add</button>
+
+<div class="limiter">
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <div class="table">
         <div class="row header">
-            <div class="cell " *ngFor="let col of tableData1.columns" dir="ltl">
-                {{ col.label }}
-            </div>
-            <div class="cell " *ngIf="tableData1.actions && tableData1.actions.update" dir="ltl">
-                ویرایش
-            </div>
-            <div class="cell " *ngIf="tableData1.actions && tableData1.actions.delete" dir="mtl">
-                حذف کردن
-            </div>
+          <div class="cell " *ngFor="let col of tableData1.columns" dir="ltl">
+            {{ col.label }}
+          </div>
+          <div class="cell " *ngIf="tableData1.actions && tableData1.actions.update" dir="ltl">
+            ویرایش
+          </div>
+          <div class="cell " *ngIf="tableData1.actions && tableData1.actions.delete" dir="mtl">
+            حذف کردن
+          </div>
         </div>
 
-        <div *ngFor="let menu of tableData1.data" class="row" [routerLink]="['./detail', menu.id]">
-            <div class=" cell " [ngSwitch]="col.type" *ngFor="let col of tableData1.columns" data-title="col">
-                <p *ngSwitchCase="'number'">{{ menu[col.field] | number }}</p>
-                <p *ngSwitchCase="'KeyValue'">
-                    {{ menu[col.field] | getValue: col.pipeParam }}
-                </p>
-                <p *ngSwitchCase="'time'" dir="ltl">
-                    {{ menu[col.field] | getTime: col.format }}
-                </p>
-                <p *ngSwitchDefault>{{ menu[col.field] }}</p>
-            </div>
-            <div class="cell " *ngIf="tableData1.actions && tableData1.actions.update" dir="ltl">
-                <button [routerLink]="['./update', menu['id']]">
-          ویرایش
-        </button>
-            </div>
-            <div class="cell " *ngIf="tableData1.actions && tableData1.actions.update" dir="ltl">
-                <button [routerLink]="['./delete', menu['id']]">
-          حذف
-        </button>
-            </div>
+        <div *ngFor="let menu of data" class="row" [routerLink]="['./detail', menu.id]">
+          <div class=" cell " [ngSwitch]="col.type" *ngFor="let col of tableData1.columns" data-title="col">
+            <p *ngSwitchCase="'number'">{{ menu[col.field] | number }}</p>
+            <p *ngSwitchCase="'KeyValue'">
+              {{ menu[col.field] | getValue: col.pipeParam }}
+            </p>
+            <p *ngSwitchCase="'time'" dir="ltl">
+              {{ menu[col.field] | getTime: col.format }}
+            </p>
+            <p *ngSwitchDefault>{{ menu[col.field] }}</p>
+          </div>
+          <div class="cell " *ngIf="tableData1.actions && tableData1.actions.update" dir="ltl">
+            <button [routerLink]="['./update', menu['id']]">
+              ویرایش
+            </button>
+          </div>
+          <div class="cell " *ngIf="tableData1.actions && tableData1.actions.delete" dir="ltl">
+            <button (click)="openDeleteDialog($event,menu.id)">
+              حذف
+            </button>
+          </div>
         </div>
+      </div>
     </div>
+
+  </div>
 </div>
+
+<mat-paginator class="footer" [length]="pager.length" [pageSize]="pager.pageSize" [pageIndex]="pager.pageIndex"
+  [pageSizeOptions]="pager.pageSizeOptions" (page)="readPage($event)" style="margin-top:7%"></mat-paginator>

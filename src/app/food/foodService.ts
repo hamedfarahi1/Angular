@@ -1,48 +1,47 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { TableService } from '../menu/tableData';
+import { KeyValue } from '@angular/common';
+import { GetParam } from '../Shared/getParam';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
-export class FoodService {
-  constructor(private http: HttpClient) {}
+export class FoodService implements TableService {
+  constructor(private http: HttpClient, private getParam: GetParam) { }
   getTypes() {
     return [
-      { key: 0, value: "almani" },
-      { key: 1, value: "irani" },
-      { key: 2, value: "italiai" },
-      { key: 3, value: "americai" }
+      { key: 0, value: 'almani' },
+      { key: 1, value: 'irani' },
+      { key: 2, value: 'italiai' },
+      { key: 3, value: 'americai' }
     ];
   }
   delete(data: any) {
     console.log(data);
-    return this.http.get("http://localhost:8080/api/Delete?id=" + data);
+    return this.http.get('http://localhost:8080/api/Delete?id=' + data);
   }
   update(data: any) {
-    return this.http.post("http://localhost:8080/api/Update", data);
-  }
-  create(data: any) {
-    return this.http.post("http://localhost:8080/api/Create", data);
-  }
-  showMenu() {
-    return this.http.get("http://localhost:8080/api/Menu");
+    return this.http.post('http://localhost:8080/api/Update', data);
   }
   getDetail(data: any) {
-    return this.http.get("http://localhost:8080/api/GetDetail?Id=" + data);
+    return this.http.get('http://localhost:8080/api/GetDetail?Id=' + data);
   }
-  search(data: any) {
-    return this.http.post("http://localhost:8080/api/Search", data);
-  }
-  getImage(data: any) {
-    return this.http.get("http://localhost:8080/GetImage?Id=" + data);
-  }
-  searchSync(data: any) {
-    return this.http.post("http://localhost:8080/api/Search", data);
-  }
-  uploadImage(image: any) {
-    return this.http.post("http://localhost:8080/api/upload", image, {
+  create(data: any) {
+
+    return this.http.post('http://localhost:8080/api/upload', data, {
       reportProgress: true,
-      responseType: "text"
+      responseType: 'text'
     });
+  }
+  read(data?: KeyValue<string, string>[]) {
+
+    if (data) {
+      return this.http.get(
+        'http://localhost:8080/api/foods' +
+        this.getParam.get(data)
+      );
+    }
+    return this.http.get('http://localhost:8080/api/foods');
   }
 }

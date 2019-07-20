@@ -36,7 +36,7 @@
             </mat-select>
         </mat-form-field>
         <div *ngIf="!detail" style="margin-top: 20px">
-            <dp-date-picker dir="ltl" [(ngModel)]="dateObject" mode="daytime" placeholder="تاریخ" theme="dp-material">
+            <dp-date-picker dir="ltl" [(ngModel)]="dateObject" mode="daytime" placeholder="تاریخ" theme="dp-material" (click)="show()">
             </dp-date-picker>
         </div>
         <div class="img1" *ngIf="detail">

@@ -1,15 +1,11 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import * as moment from "jalali-moment";
+import { Pipe, PipeTransform } from '@angular/core';
+import * as moment from 'moment-jalaali';
 
 @Pipe({
-  name: "getTime"
+  name: 'getTime'
 })
-export class getTimeValue implements PipeTransform {
+export class GetTimeValue implements PipeTransform {
   transform(time: string, format) {
-    const date = moment(time);
-    return date
-      .clone()
-      .locale("fa")
-      .format(format);
+    return moment(time).format(format);
   }
 }

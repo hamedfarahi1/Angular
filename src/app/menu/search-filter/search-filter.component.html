@@ -1,0 +1,9 @@
+<div class="row">
+
+  <span *ngFor="let filter of columns">
+    <input *ngIf="filter.filter" class="basic-slide" id="name" type="text" [(ngModel)]="filter.filterValue" /><label
+      *ngIf="filter.filter" for="name">{{filter.label}}</label>
+  </span>
+  <button (click)="submit()">search</button>
+
+</div>
