@@ -6,14 +6,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FoodRoutingModule } from './food-routing.module';
 import { FoodMenuComponent } from './food-menu/food-menu.component';
-import { FoodImageComponent } from './food-image/food-image.component';
 import { FormsModule } from '@angular/forms';
+import { GalleryComponent } from './gallery/gallery.component';
 
 @NgModule({
     declarations: [
         OptionsComponent,
         FoodMenuComponent,
-        FoodImageComponent
+        GalleryComponent
     ],
     providers: [FormData],
     imports: [CommonModule, FoodRoutingModule, SharedModule, MenuModule, FormsModule],

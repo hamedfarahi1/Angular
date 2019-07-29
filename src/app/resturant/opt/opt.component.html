@@ -1,55 +1,24 @@
-<div style="display: flex; align-items: center">
+<div style="width:40% ;height: 50%; margin: auto; margin-top: 10%">
+  <div style="display: inline-grid;margin-right: 20%;">
+    <mat-form-field class="full-width">
+      <input [(ngModel)]="person.name" type="text" matInput placeholder="نام">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input [(ngModel)]="person.family" type="text" matInput placeholder="نام خانوادگی">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input appNumberInput [(ngModel)]="person.salary" type="text" matInput placeholder="حقوق ماهیانه ">
+    </mat-form-field>
 
-    <div style="margin-top: 50px; width: 30%; margin-left: 33%">
-        <label for="inp" class="inp">
-      <input
-        *ngIf="!detail"
-        [(ngModel)]="person.name"
-        type="text"
-        id="inp"
-        placeholder="&nbsp;"
-      />
-      <h3 *ngIf="detail">{{ person.name }}</h3>
-      <span *ngIf="!detail" class="label">name</span>
-      <span class="border"></span>
-    </label>
-        <label for="inp" class="inp">
-      <input
-        *ngIf="!detail"
-        [(ngModel)]="person.family"
-        type="text"
-        id="inp"
-        placeholder="&nbsp;"
-      />
-      <h3 *ngIf="detail">{{ person.family }}</h3>
-      <span *ngIf="!detail" class="label">family</span>
-      <span class="border"></span>
-      <h3 *ngIf="detail && person.dateObject">{{ person.dateObject | getTime : 'YYYY/MM/D' }}</h3>
-    </label>
-        <label for="inp" class="inp">
-        <input
-          *ngIf="!detail"
-          [(ngModel)]="person.salary"
-          type="text"
-          id="inp"
-          placeholder="&nbsp;"
-        />
-        <h3 *ngIf="detail">{{ person.salary }}</h3>
-        <span *ngIf="!detail" class="label">salary</span>
-        <span class="border"></span>
-      </label>
-
-        <div *ngIf="!detail" style="margin-top: 20px">
-            <dp-date-picker dir="ltl" [(ngModel)]="dateObject" mode="daytime" placeholder="تاریخ" theme="dp-material">
-            </dp-date-picker>
-        </div>
-
-        <div *ngIf="!detail" style="margin-top:20px">
-
-            <button (click)="submit()" style="margin-top: 60px;width: 100%; height: 60px;" class="button">
-        Submit
-      </button>
-        </div>
+    <div *ngIf="!detail" style="margin-top: 20px">
+      <dp-date-picker dir="ltr" [(ngModel)]="dateObject" mode="daytime" placeholder="تاریخ" theme="dp-material">
+      </dp-date-picker>
     </div>
 
+    <div *ngIf="!detail" style="margin-top:20px; display: flex">
+      <button style="min-width: 38%;" mat-raised-button (click)="submit()">
+        تایید
+      </button>
+    </div>
+  </div>
 </div>

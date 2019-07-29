@@ -7,14 +7,13 @@ import * as moment from 'jalali-moment';
 @Component({
   selector: 'app-opt',
   templateUrl: './opt.component.html',
-  styleUrls: ['./opt.component.css'],
+  styleUrls: ['./opt.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OptComponent implements OnInit {
   dateObject = moment();
   types: any;
   person: EmployeesSh;
-  detail = false;
   update = false;
   deleteMessage = '';
 
@@ -29,7 +28,6 @@ export class OptComponent implements OnInit {
     let path: string;
     this.route.url.subscribe(param => {
       path = param[1].path;
-      console.log(path);
     });
     if (path === 'update') {
 

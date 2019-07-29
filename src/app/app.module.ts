@@ -8,9 +8,10 @@ import { FoodModule } from './food/food.module';
 import { ToastrModule } from 'ngx-toastr';
 import { MenuModule } from './menu/menu.module';
 import { ResturantModule } from './resturant/resturant.module';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

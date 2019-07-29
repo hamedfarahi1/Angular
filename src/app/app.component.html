@@ -1,5 +1,18 @@
-<div class="div1">
-  <button class="btn" [routerLink]="['food']">food</button>
-  <button class="btn" [routerLink]="['resturant']">resturant</button>
+<app-header [isOpen]="opened" (toggle)="sidenav.toggle()"></app-header>
+
+<div style="top: 70px;">
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" position="end" [(opened)]="opened" (opened)="events.push('open!')"
+      (closed)="events.push('close!')">
+      <div class="div1">
+        <button class="btn" mat-raised-button (click)="navigate('food')">Food</button>
+        <button class="btn" mat-raised-button (click)="navigate('resturant')">Resturant</button>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+
 </div>
-<router-outlet></router-outlet>

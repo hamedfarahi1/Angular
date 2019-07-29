@@ -1,33 +1,42 @@
 import {
   Component,
   OnInit,
-  Input
+  Input,
+  ViewChild,
+  AfterViewInit
 } from '@angular/core';
-import { TableData, TableService } from './../tableData';
+import { TableData, TableService } from '../table';
 import { DeleteComponent } from './../delete/delete.component';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialogConfig, MatDialog } from '@angular/material';
-import { KeyValue } from '@angular/common';
+import { MatDialogConfig, MatDialog, MatPaginator } from '@angular/material';
+import { KeyValue, JsonPipe } from '@angular/common';
 import { MyPagintor } from '../pagintor';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { pairwise, take, filter } from 'rxjs/operators';
+
+
 
 
 @Component({
   selector: 'app-table-hmd',
   templateUrl: './table-hmd.component.html',
-  styleUrls: ['./table-hmd.component.css']
+  styleUrls: ['./table-hmd.component.scss']
 })
-export class TableHmdComponent implements OnInit {
+export class TableHmdComponent implements OnInit, AfterViewInit {
+
+
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @Input() tableData1: TableData;
   @Input() service: TableService;
   data;
   deleteMessage = '';
   filterData: KeyValue<string, string>[];
   pager: MyPagintor = {} as MyPagintor;
-  constructor(private toastr: ToastrService, private dialog: MatDialog) { }
-  readPage(event) {
-    this.pager.pageIn = event.pageIndex;
-    const res = [];
+  col = [];
+  constructor(private toastr: ToastrService, private dialog: MatDialog, private route: ActivatedRoute, private router: Router) { }
 
+  readPage(event) {
+    const res = [];
     res.push({ key: 'page', value: event.pageIndex });
     if (this.filterData) {
       for (const ele of this.filterData) {
@@ -35,16 +44,52 @@ export class TableHmdComponent implements OnInit {
       }
     }
     this.read(res);
-  }
-  ngOnInit() {
-    this.pager.pageIn = 0;
-    const res: KeyValue<string, string>[] = [];
-    this.pager.pageSize = 3;
-    this.pager.pageSizeOptions = [3, 6, 9];
-    res.push({ key: 'page', value: '0' });
-    this.read(res);
+    this.router.navigate([], {
+      queryParams: {
+        page: event.pageIndex,
+        pageSize: event.pageSize, filter: JSON.stringify(this.filterData)
+      }
+    });
   }
 
+  ngOnInit() {
+
+    for (const ele of this.tableData1.columns) {
+      this.col.push(ele.field);
+    }
+    if (this.tableData1.actions.action) { this.col.push('actions'); }
+    const res: KeyValue<string, string>[] = [];
+    this.pager.pageSize = 3;
+    this.route.queryParams.subscribe(params => {
+      if (params.page) {
+        this.pager.pageIndex = +params.page;
+        res.push({ key: 'page', value: params.page });
+      } else {
+        this.pager.pageIndex = 0;
+        res.push({ key: 'page', value: '0' });
+      }
+      if (params.filter) {
+        this.filterData = JSON.parse(params.filter);
+        for (const ele of this.filterData) {
+          res.push(ele);
+          for (const elem of this.tableData1.columns) {
+            if (ele.key === elem.field) {
+              elem.filterValue = ele.value;
+            }
+          }
+        }
+      }
+    });
+    this.read(res);
+  }
+  ngAfterViewInit(): void {
+    this.paginator._intl.itemsPerPageLabel = 'تعداد در هر صفحه';
+    this.paginator._intl.getRangeLabel = (page: number, pageSize: number, length: number) => {
+      const end = (page * pageSize + 3) > length ? length : page * pageSize + 3;
+      const start = end === length ? length : page * pageSize + 1;
+      return ` ${start}  -   ${end}  از  ${length}  `;
+    };
+  }
   filter(result?: KeyValue<string, string>[]) {
     const res = [];
     this.filterData = result;
@@ -61,8 +106,12 @@ export class TableHmdComponent implements OnInit {
       if (res.menu) {
         this.data = res.menu;
         this.pager.length = res.count;
+      } else {
+        this.data = [];
+        this.pager.length = 0;
       }
     });
+
   }
 
   openDeleteDialog(event: MouseEvent, value: any) {

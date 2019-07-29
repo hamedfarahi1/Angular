@@ -14,15 +14,29 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { DpDatePickerModule } from 'ng2-jalali-date-picker';
 import { Value } from './ValuePipe.pipe';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
+import { NumberInputDirective } from './number-input.directive';
+
+
 
 @NgModule({
-  declarations: [Value, GetTimeValue],
+  declarations: [Value, GetTimeValue, NumberInputDirective],
   imports: [CommonModule,
-    MatDialogModule,
     BrowserModule,
-    FormsModule],
+    FormsModule,
+    MatButtonModule,
+    MatSidenavModule
+  ],
   providers: [],
   exports: [
+    MatButtonModule,
+    MatSidenavModule,
+    MatTableModule,
     CommonModule,
     MatDatepickerModule,
     MatSelectModule,
@@ -39,7 +53,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     GetTimeValue,
     Value,
     HttpClientModule,
-    MatPaginatorModule, MatDatepickerModule
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatIconModule,
+    MatMenuModule,
+    MatCarouselModule,
+    NumberInputDirective
   ]
 })
 export class SharedModule { }

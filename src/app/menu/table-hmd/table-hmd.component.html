@@ -1,49 +1,57 @@
-<app-search-filter [columns]="tableData1.columns" (searched)="filter($event)"></app-search-filter>
-<button class="button" [routerLink]="['./create']">Add</button>
+<div>
 
-<div class="limiter">
-  <div class="container-table100">
-    <div class="wrap-table100">
-      <div class="table">
-        <div class="row header">
-          <div class="cell " *ngFor="let col of tableData1.columns" dir="ltl">
-            {{ col.label }}
-          </div>
-          <div class="cell " *ngIf="tableData1.actions && tableData1.actions.update" dir="ltl">
-            ویرایش
-          </div>
-          <div class="cell " *ngIf="tableData1.actions && tableData1.actions.delete" dir="mtl">
-            حذف کردن
-          </div>
-        </div>
 
-        <div *ngFor="let menu of data" class="row" [routerLink]="['./detail', menu.id]">
-          <div class=" cell " [ngSwitch]="col.type" *ngFor="let col of tableData1.columns" data-title="col">
-            <p *ngSwitchCase="'number'">{{ menu[col.field] | number }}</p>
-            <p *ngSwitchCase="'KeyValue'">
-              {{ menu[col.field] | getValue: col.pipeParam }}
-            </p>
-            <p *ngSwitchCase="'time'" dir="ltl">
-              {{ menu[col.field] | getTime: col.format }}
-            </p>
-            <p *ngSwitchDefault>{{ menu[col.field] }}</p>
-          </div>
-          <div class="cell " *ngIf="tableData1.actions && tableData1.actions.update" dir="ltl">
-            <button [routerLink]="['./update', menu['id']]">
-              ویرایش
-            </button>
-          </div>
-          <div class="cell " *ngIf="tableData1.actions && tableData1.actions.delete" dir="ltl">
-            <button (click)="openDeleteDialog($event,menu.id)">
-              حذف
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+
+  <div class="menu">
+    <app-search-filter [tableData]="tableData1" (searched)="filter($event)"></app-search-filter>
+    <table mat-table [dataSource]="data" class="mat-elevation-z8">
+
+
+      <ng-container *ngFor="let menu of tableData1.columns" matColumnDef="{{menu.field}}">
+        <th class="mat-header-cell" mat-header-cell *matHeaderCellDef> {{menu.label}} </th>
+        <td mat-cell [ngSwitch]="menu.type" *matCellDef="let element">
+          <ng-container *ngSwitchCase="'KeyValue'">
+            {{element[menu.field] | getValue: menu.pipeParam}}
+          </ng-container>
+          <ng-container *ngSwitchCase="'time'">
+            {{ element[menu.field] | getTime: menu.format }}
+          </ng-container>
+          <ng-container *ngSwitchCase="'number'">
+            {{ element[menu.field] | number }}
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            {{ element[menu.field]}}
+          </ng-container>
+
+        </td>
+
+      </ng-container>
+      <ng-container *ngIf="tableData1.actions" matColumnDef="actions">
+        <th class="mat-header-cell" mat-header-cell *matHeaderCellDef> عملیات</th>
+        <td mat-cell *matCellDef="let element">
+
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button *ngIf="tableData1.actions.delete" mat-menu-item
+              (click)="openDeleteDialog($event,element['id'])">حذف</button>
+            <button *ngIf="tableData1.actions.update" mat-menu-item
+              [routerLink]="['./update', element['id']]">ویرایش</button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+
+
+      <tr mat-header-row *matHeaderRowDef="col"></tr>
+      <tr mat-row *matRowDef="let row; columns: col;"></tr>
+    </table>
+
+    <mat-paginator class="mat-paginator" [length]="pager.length" [pageSize]="pager.pageSize"
+      [pageIndex]="pager.pageIndex" [pageSizeOptions]="pager.pageSizeOptions" (page)="readPage($event)"></mat-paginator>
 
   </div>
-</div>
 
-<mat-paginator class="footer" [length]="pager.length" [pageSize]="pager.pageSize" [pageIndex]="pager.pageIndex"
-  [pageSizeOptions]="pager.pageSizeOptions" (page)="readPage($event)" style="margin-top:7%"></mat-paginator>
+
+</div>

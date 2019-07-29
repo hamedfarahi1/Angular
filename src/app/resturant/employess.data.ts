@@ -1,7 +1,7 @@
 import { KeyValue } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { TableService } from './../menu/tableData';
+import { TableService } from '../menu/table';
 import { EmployeesSh } from './employess.sh';
 @Injectable({
   providedIn: 'root'
@@ -11,92 +11,92 @@ export class EmployeesData implements TableService {
     menu: [
       {
         id: 1,
-        name: 'hamed',
-        family: 'farahi',
+        name: 'حامد',
+        family: 'فرحی',
         salary: '16000',
         time: '2014-07-15T17:14:31+04:30'
       },
       {
         id: 2,
-        name: 'reza',
-        family: 'abbasi',
+        name: 'رضا',
+        family: 'عباسی',
         salary: '18000',
         time: '2019-07-15T17:14:31+04:30'
       },
       {
         id: 3,
-        name: 'mahdi',
-        family: 'kase',
+        name: 'مهدی',
+        family: 'کاسه آتشین',
         salary: '22000',
         time: '2019-07-07T17:14:31+04:30'
       },
       {
         id: 4,
-        name: 'farzad',
-        family: 'faghih',
+        name: 'فرزاد',
+        family: 'فقیه',
         salary: '16000',
         time: '2018-07-15T17:14:31+04:30'
       },
       {
         id: 5,
-        name: 'farhad',
-        family: 'rezai',
+        name: 'فرهاد',
+        family: 'رضایی',
         salary: '62100',
         time: '2016-07-15T17:14:31+04:30'
       },
       {
         id: 6,
-        name: 'shahin',
-        family: 'rezai',
+        name: 'شاهین',
+        family: 'رضایی',
         salary: '62100',
         time: '2016-07-15T17:14:31+04:30'
       },
       {
         id: 7,
-        name: 'sajjad',
-        family: 'mashhadi',
+        name: 'سجاد',
+        family: 'مشهدی',
         salary: '62100',
         time: '2016-07-15T17:14:31+04:30'
       },
       {
         id: 8,
-        name: 'saber',
-        family: 'jamshidi',
+        name: 'صابر',
+        family: 'جمشیدی',
         salary: '62100',
         time: '2016-07-15T17:14:31+04:30'
       },
       {
         id: 9,
-        name: 'kaveh',
-        family: 'shahedi',
+        name: 'کاوه',
+        family: 'شاهدی',
         salary: '62100',
         time: '2016-07-15T17:14:31+04:30'
       },
       {
         id: 10,
-        name: 'saleh',
-        family: 'ghorbani',
+        name: 'صالح',
+        family: 'قربانی',
         salary: '62100',
         time: '2016-07-15T17:14:31+04:30'
       },
       {
         id: 11,
-        name: 'amir',
-        family: 'eghbali',
+        name: 'امیر',
+        family: 'اقبالی',
         salary: '62100',
         time: '2016-07-15T17:14:31+04:30'
       },
       {
         id: 12,
-        name: 'kazem',
-        family: 'mohammadi',
+        name: 'کاظم',
+        family: 'محمدی',
         salary: '62100',
         time: '2016-07-15T17:14:31+04:30'
       },
       {
         id: 13,
-        name: 'nosrat',
-        family: 'fakoori',
+        name: 'نصرت',
+        family: 'فکوری',
         salary: '62100',
         time: '2016-07-15T17:14:31+04:30'
       }
@@ -120,23 +120,28 @@ export class EmployeesData implements TableService {
 
           // tslint:disable-next-line:no-shadowed-variable
           result.menu = result.menu.filter(elm => {
-            let cond = false;
+            let cond1 = true;
+            let cond2 = true;
+            let cond3 = true;
             if (data[1]) {
+              cond1 = false;
               if (elm.name.includes(data[1].value) && data[1].value.length > 0) {
-                cond = true;
+                cond1 = true;
               }
             }
             if (data[2]) {
-              if (elm.name.includes(data[2].value) && data[2].value.length > 0) {
-                cond = true;
+              cond2 = false;
+              if (elm.family.includes(data[2].value) && data[2].value.length > 0) {
+                cond2 = true;
               }
             }
             if (data[3]) {
-              if (elm.name.includes(data[3].value) && data[3].value.length > 0) {
-                cond = true;
+              cond3 = false;
+              if (elm.salary.includes(data[3].value) && data[3].value.length > 0) {
+                cond3 = true;
               }
             }
-            return cond;
+            return cond1 && cond2 && cond3;
           });
         }
         result.count = result.menu.length;
@@ -167,6 +172,7 @@ export class EmployeesData implements TableService {
   }
   create(person) {
     this.data.menu.push(person);
+    this.data.count++;
     return of({ report: 'added' });
   }
   delete(data: any) {

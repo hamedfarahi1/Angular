@@ -1,9 +1,30 @@
-<div class="row">
-
-  <span *ngFor="let filter of columns">
-    <input *ngIf="filter.filter" class="basic-slide" id="name" type="text" [(ngModel)]="filter.filterValue" /><label
-      *ngIf="filter.filter" for="name">{{filter.label}}</label>
-  </span>
-  <button (click)="submit()">search</button>
+<div style="display: flex;margin-top: 40px;">
+  <div class="example-container">
+    <ng-container *ngFor="let filter of tableData.columns">
+      <mat-form-field *ngIf="filter.filter" class="full-width" style="margin-left: 20px; text-align:right">
+        <input *ngIf="filter.type === 'number'" appNumberInput matInput [(ngModel)]="filter.filterValue"
+          placeholder="{{filter.label}}">
+        <input *ngIf="filter.type !== 'number'" matInput [(ngModel)]="filter.filterValue"
+          placeholder="{{filter.label}}">
+      </mat-form-field>
+    </ng-container>
+  </div>
+  <button mat-raised-button style="align-self: center;" (click)="submit()">
+    <mat-icon aria-hidden="false" style="align-self: normal">
+      search
+    </mat-icon>
+  </button>
+  <button mat-raised-button style="align-self: center; margin-right: 20px" [routerLink]="['./create']">
+    <mat-icon aria-hidden="false" style="align-self: normal">
+      add
+    </mat-icon>
+  </button>
+  <button *ngIf="tableData.actions.other" mat-raised-button style="align-self: center; margin-right: 20px"
+    [routerLink]="[tableData.actions.other.link]">
+    <mat-icon *ngIf="tableData.actions.other.icon" aria-hidden="false" style="align-self: normal">
+      {{tableData.actions.other.icon}}
+    </mat-icon>
+    {{tableData.actions.other.label}}
+  </button>
 
 </div>

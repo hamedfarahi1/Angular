@@ -1,17 +1,20 @@
-import { TableData } from '../../menu/tableData';
-import { FoodService } from '../foodService';
+import { TableData } from '../../menu/table';
+import { FoodService } from '../food-service';
 import { Component, OnInit } from '@angular/core';
+import { RouterExtService } from 'src/app/routerService';
 
 @Component({
     selector: 'app-food-menu',
     templateUrl: './food-menu.component.html',
-    styleUrls: ['./food-menu.component.css']
+    styleUrls: ['./food-menu.component.scss']
 })
 export class FoodMenuComponent implements OnInit {
-    constructor(public foodService: FoodService) { }
+
+    constructor(public foodService: FoodService, private routerService: RouterExtService) { }
     tableData: TableData;
 
     ngOnInit() {
+        console.log(this.routerService.getPreviousUrl());
         if (!this.tableData) {
             this.tableData = {} as TableData;
             this.tableData = {
@@ -44,7 +47,15 @@ export class FoodMenuComponent implements OnInit {
                         format: 'jYYYY/jM/jD'
                     }
                 ],
-                actions: { update: true, delete: true }
+                actions: {
+                    action: true, update: true, delete: true
+                    , other: {
+                        label: 'گالری',
+                        link: './gallery',
+                        icon: 'photo'
+                    }
+                }
+
             };
         }
     }

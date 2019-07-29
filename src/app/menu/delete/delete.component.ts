@@ -4,11 +4,10 @@ import { MatDialogRef } from '@angular/material';
 @Component({
   selector: 'app-delete',
   templateUrl: './delete.component.html',
-  styleUrls: ['./delete.component.css']
+  styleUrls: ['./delete.component.scss']
 })
 export class DeleteComponent implements OnInit {
   @Input() data;
-  Message = 'Delete Food';
   DeleteMessage = '';
 
   constructor(
@@ -19,7 +18,6 @@ export class DeleteComponent implements OnInit {
 
     this.data.service.delete(this.data.data).subscribe(res => {
       this.dialogRef.close(this.DeleteMessage);
-      this.Message = 'Deleted';
     });
 
   }

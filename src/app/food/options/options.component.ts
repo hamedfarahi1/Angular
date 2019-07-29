@@ -1,5 +1,5 @@
-import { FoodDetail } from '../FoodDetail';
-import { FoodService } from '../foodService';
+import { FoodDetail } from '../food-detail';
+import { FoodService } from '../food-service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -9,15 +9,14 @@ import * as moment from 'jalali-moment';
 @Component({
     selector: 'app-options',
     templateUrl: './options.component.html',
-    styleUrls: ['./options.component.css']
+    styleUrls: ['./options.component.scss']
 })
 export class OptionsComponent implements OnInit {
+
     types: any;
     food: FoodDetail;
     formData: FormData = new FormData();
-    detail = false;
     dateObject = moment();
-    deleteMessage = '';
     constructor(
         private route: ActivatedRoute,
         private toastr: ToastrService,
@@ -33,7 +32,6 @@ export class OptionsComponent implements OnInit {
         this.route.url.subscribe(param => {
             path = param[1].path;
         });
-
         this.types = this.foodService.getTypes();
         if (path !== 'create') {
             this.route.params.subscribe(params => {
@@ -41,11 +39,9 @@ export class OptionsComponent implements OnInit {
                     this.food = res;
                 });
             });
-            if (path === 'detail') {
-                this.detail = true;
-            }
         }
     }
+
     submit() {
         if (this.food.id) {
             this.updateFoodInfo();

@@ -2,10 +2,9 @@ import { PageEvent } from '@angular/material';
 
 export class MyPagintor {
   length: number;
-  pageSize: number;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSize = 3;
+  pageSizeOptions: number[] = [3, 6, 9];
   pageIndex: number;
-  pageIn: number;
 
   // MatPaginator Output
   pageEvent: PageEvent;

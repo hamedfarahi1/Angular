@@ -1,20 +1,21 @@
-import { TableData } from 'src/app/menu/tableData';
+import { TableData } from 'src/app/menu/table';
 import { Component, OnInit } from '@angular/core';
 import { EmployeesData } from '../employess.data';
+import { RouterExtService } from 'src/app/routerService';
 
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
-  styleUrls: ['./employees.component.css'],
+  styleUrls: ['./employees.component.scss'],
 })
 export class EmployeesComponent implements OnInit {
   tableData: TableData;
 
-  constructor(public service: EmployeesData) { }
+  constructor(public service: EmployeesData, private routerService: RouterExtService) { }
 
   ngOnInit() {
-
+    console.log(this.routerService.getPreviousUrl());
     if (!this.tableData) {
       this.tableData = {
         columns: [
@@ -42,6 +43,7 @@ export class EmployeesComponent implements OnInit {
           }
         ],
         actions: {
+          action: true,
           update: true,
           delete: true
         }

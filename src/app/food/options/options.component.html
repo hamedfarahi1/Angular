@@ -1,54 +1,34 @@
-<div style="display: flex; align-items: center">
-    <div style="margin-top: 50px; width: 30%; margin-left: 33%">
-        <label for="inp" class="inp">
-      <input
-        *ngIf="!detail"
-        [(ngModel)]="food.name"
-        type="text"
-        id="inp"
-        placeholder="&nbsp;"
-      />
-      <h3 *ngIf="detail">{{ food.name }}</h3>
-      <span *ngIf="!detail" class="label">name</span>
-      <span class="border"></span>
-    </label>
-        <label for="inp" class="inp">
-      <input
-        *ngIf="!detail"
-        [(ngModel)]="food.price"
-        type="text"
-        id="inp"
-        placeholder="&nbsp;"
-      />
-      <h3 *ngIf="detail">37</h3>
-      <span *ngIf="!detail" class="label">price</span>
-      <span class="border"></span>
-      <h3 *ngIf="detail && food.dateObject">{{ food.dateObject | getTime : 'YYYY/MM/D' }}</h3>
-    </label>
-
-        <h3 *ngIf="detail">{{ food.type | getValue: types }}</h3>
-        <mat-form-field *ngIf="!detail">
-            <mat-label>Food Type</mat-label>
-            <mat-select [(ngModel)]="food.type">
-                <mat-option *ngFor="let ty of types" [value]="ty.key">
-                    {{ ty.value }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <div *ngIf="!detail" style="margin-top: 20px">
-            <dp-date-picker dir="ltl" [(ngModel)]="dateObject" mode="daytime" placeholder="تاریخ" theme="dp-material" (click)="show()">
-            </dp-date-picker>
-        </div>
-        <div class="img1" *ngIf="detail">
-            <app-food-image [id]="food.id"></app-food-image>
-        </div>
-        <div *ngIf="!detail" style="margin-top:20px">
-            <div class="uploadImage">
-                <input class="upd" #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" />
+<div>
+    <div *ngIf="!detail" style="width:40% ;height: 50%; margin: auto; margin-top: 10%">
+        <div style="display: inline-grid;margin-right: 20%;">
+            <mat-form-field class="full-width">
+                <input [(ngModel)]="food.name" type="text" matInput placeholder="نام">
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <input appNumberInput [(ngModel)]="food.price" type="text" matInput placeholder="قیمت">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>نوع غذا</mat-label>
+                <mat-select [(ngModel)]="food.type">
+                    <mat-option *ngFor="let ty of types" [value]="ty.key">
+                        {{ ty.value }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div style="margin-top: 20px">
+                <dp-date-picker dir="ltr" [(ngModel)]="dateObject" mode="daytime" placeholder="تاریخ"
+                    theme="dp-material">
+                </dp-date-picker>
             </div>
-            <button (click)="submit()" style="margin-top: 60px;width: 100%; height: 60px;" class="button">
-        Add
-      </button>
+            <div style="margin-top:20px; display: flex">
+                <div class="upload-btn-wrapper">
+                    <button mat-raised-button color="primary">Upload an image</button>
+                    <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" />
+                </div>
+                <button style="margin-right: 18px; min-width: 38%;" mat-raised-button (click)="submit()">
+                    تایید
+                </button>
+            </div>
         </div>
     </div>
 </div>
