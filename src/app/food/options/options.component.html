@@ -1,34 +1,177 @@
 <div>
     <div *ngIf="!detail" style="width:40% ;height: 50%; margin: auto; margin-top: 10%">
-        <div style="display: inline-grid;margin-right: 20%;">
+
+        <formio [form]='{
+            "components": [
+                {
+                    "label": "first name",
+                    "allowMultipleMasks": false,
+                    "showWordCount": false,
+                    "showCharCount": false,
+                    "tableView": true,
+                    "alwaysEnabled": false,
+                    "type": "textfield",
+                    "input": true,
+                    "key": "name",
+                    "defaultValue": "",
+                    "refreshOn": "submit",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "",
+                        "json": ""
+                    },
+                    "conditional": {
+                        "show": "",
+                        "when": "",
+                        "json": ""
+                    },
+                    "inputFormat": "plain",
+                    "encrypted": false,
+                    "customConditional": "",
+                    "properties": {},
+                    "tags": [],
+                    "logic": [],
+                    "widget": {
+                        "type": ""
+                    },
+                    "reorder": false
+                },
+                {
+                    "label": "last name",
+                    "allowMultipleMasks": false,
+                    "showWordCount": false,
+                    "showCharCount": false,
+                    "tableView": true,
+                    "alwaysEnabled": false,
+                    "type": "textfield",
+                    "input": true,
+                    "key": "lastName",
+                    "defaultValue": "",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "",
+                        "json": ""
+                    },
+                    "conditional": {
+                        "show": "",
+                        "when": "",
+                        "json": ""
+                    },
+                    "inputFormat": "plain",
+                    "encrypted": false,
+                    "customConditional": "",
+                    "properties": {},
+                    "logic": [],
+                    "widget": {
+                        "type": ""
+                    },
+                    "tags": [],
+                    "reorder": false
+                },
+                {
+                    "label": "price",
+                    "allowMultipleMasks": false,
+                    "showWordCount": false,
+                    "showCharCount": false,
+                    "tableView": true,
+                    "alwaysEnabled": false,
+                    "type": "textfield",
+                    "input": true,
+                    "key": "price",
+                    "defaultValue": "",
+                    "validate": {
+                        "required": true,
+                        "customMessage": "",
+                        "json": ""
+                    },
+                    "conditional": {
+                        "show": "",
+                        "when": "",
+                        "json": ""
+                    },
+                    "inputFormat": "plain",
+                    "encrypted": false,
+                    "properties": {},
+                    "tags": [],
+                    "customConditional": "",
+                    "logic": [],
+                    "widget": {
+                        "type": ""
+                    },
+                    "reorder": false
+                },
+                {
+                    "label": "Submit",
+                    "state": "",
+                    "theme": "primary",
+                    "shortcut": "",
+                    "disableOnInvalid": true,
+                    "mask": false,
+                    "tableView": true,
+                    "alwaysEnabled": false,
+                    "type": "button",
+                    "key": "submit",
+                    "input": true,
+                    "defaultValue": false,
+                    "validate": {
+                        "customMessage": "",
+                        "json": ""
+                    },
+                    "conditional": {
+                        "show": "",
+                        "when": "",
+                        "json": ""
+                    },
+                    "properties": {},
+                    "customConditional": "",
+                    "logic": [],
+                    "encrypted": false,
+                    "showValidations": false,
+                    "event": "",
+                    "url": "",
+                    "custom": "",
+                    "reorder": false
+                }
+            ]
+        }' (submit)="onSubmit($event.data)"></formio>
+
+        <!-- <div [formGroup]="foodForm" style="display: inline-grid;margin-right: 20%;">
             <mat-form-field class="full-width">
-                <input [(ngModel)]="food.name" type="text" matInput placeholder="نام">
+                <input formControlName="name" type="text" matInput placeholder="نام">
             </mat-form-field>
             <mat-form-field class="full-width">
-                <input appNumberInput [(ngModel)]="food.price" type="text" matInput placeholder="قیمت">
+                <input appNumberInput formControlName="price" type="text" matInput placeholder="قیمت">
             </mat-form-field>
             <mat-form-field>
                 <mat-label>نوع غذا</mat-label>
-                <mat-select [(ngModel)]="food.type">
+                <mat-select formControlName="type">
                     <mat-option *ngFor="let ty of types" [value]="ty.key">
                         {{ ty.value }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <div style="margin-top: 20px">
-                <dp-date-picker dir="ltr" [(ngModel)]="dateObject" mode="daytime" placeholder="تاریخ"
-                    theme="dp-material">
-                </dp-date-picker>
-            </div>
-            <div style="margin-top:20px; display: flex">
-                <div class="upload-btn-wrapper">
-                    <button mat-raised-button color="primary">Upload an image</button>
-                    <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" />
+            <div style="display: flex">
+                <div style="margin-top: 20px">
+                    <dp-date-picker dir="ltr" formControlName="dateObject" mode="daytime" placeholder="تاریخ"
+                        theme="dp-material">
+                    </dp-date-picker>
                 </div>
-                <button style="margin-right: 18px; min-width: 38%;" mat-raised-button (click)="submit()">
+                <div style="margin-top:20px; ">
+                    <div class="upload-btn-wrapper">
+                        <button mat-raised-button color="primary" style="margin-right: 20px">Upload an image</button>
+                        <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" />
+                    </div>
+
+                </div>
+            </div>
+            <div style="display: flex; margin-top: 30px">
+                <button [disabled]="!foodForm.valid" style=" min-width: 38%;" mat-raised-button (click)="submit()">
                     تایید
                 </button>
+                <button style="margin-right: 100px; min-width: 38%;" mat-raised-button (click)="back()">
+                    بازگشت
+                </button>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>

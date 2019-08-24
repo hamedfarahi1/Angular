@@ -2,89 +2,100 @@
 @import "~ngx-toastr/toastr.css";
 
 * {
-    font-family: IRANSans;
-    text-align: right;
+  font-family: IRANSans;
+  text-align: right;
 }
 
 @font-face {
-    font-family: IRANSans;
-    font-weight: 900;
-    src: url('/assets/fonts/eot/IRANSansWeb(FaNum)_Black.eot');
-    src: local("?"), url('/assets/fonts/woff/IRANSansWeb(FaNum)_Black.woff') format("woff"), url('/assets/fonts/ttf/IRANSansWeb(FaNum)_Black.ttf') format("truetype");
-    font-style: normal
+  font-family: IRANSans;
+  font-weight: 900;
+  src: url('/assets/fonts/eot/IRANSansWeb(FaNum)_Black.eot');
+  src: local("?"), url('/assets/fonts/woff/IRANSansWeb(FaNum)_Black.woff') format("woff"), url('/assets/fonts/ttf/IRANSansWeb(FaNum)_Black.ttf') format("truetype");
+  font-style: normal
 }
 
 @font-face {
-    font-family: IRANSans;
-    font-weight: bold;
-    src: url('/assets/fonts/eot/IRANSansWeb(FaNum)_Bold.eot');
-    src: local("?"), url('/assets/fonts/woff/IRANSansWeb(FaNum)_Bold.woff') format("woff"), url('/assets/fonts/ttf/IRANSansWeb(FaNum)_Bold.ttf') format("truetype");
-    font-style: normal
+  font-family: IRANSans;
+  font-weight: bold;
+  src: url('/assets/fonts/eot/IRANSansWeb(FaNum)_Bold.eot');
+  src: local("?"), url('/assets/fonts/woff/IRANSansWeb(FaNum)_Bold.woff') format("woff"), url('/assets/fonts/ttf/IRANSansWeb(FaNum)_Bold.ttf') format("truetype");
+  font-style: normal
 }
 
 @font-face {
-    font-family: IRANSans;
-    font-weight: 500;
-    src: url('/assets/fonts/eot/IRANSansWeb(FaNum)_Medium.eot');
-    src: local("?"), url('/assets/fonts/woff/IRANSansWeb(FaNum)_Medium.woff') format("woff"), url('/assets/fonts/ttf/IRANSansWeb(FaNum)_Medium.ttf') format("truetype");
-    font-style: normal
+  font-family: IRANSans;
+  font-weight: 500;
+  src: url('/assets/fonts/eot/IRANSansWeb(FaNum)_Medium.eot');
+  src: local("?"), url('/assets/fonts/woff/IRANSansWeb(FaNum)_Medium.woff') format("woff"), url('/assets/fonts/ttf/IRANSansWeb(FaNum)_Medium.ttf') format("truetype");
+  font-style: normal
 }
 
 @font-face {
-    font-family: IRANSans;
-    font-weight: 200;
-    src: url('/assets/fonts/eot/IRANSansWeb(FaNum)_Light.eot');
-    src: local("?"), url('/assets/fonts/woff/IRANSansWeb(FaNum)_Light.woff') format("woff"), url('/assets/fonts/ttf/IRANSansWeb(FaNum)_Light.ttf') format("truetype");
-    font-style: normal
+  font-family: IRANSans;
+  font-weight: 200;
+  src: url('/assets/fonts/eot/IRANSansWeb(FaNum)_Light.eot');
+  src: local("?"), url('/assets/fonts/woff/IRANSansWeb(FaNum)_Light.woff') format("woff"), url('/assets/fonts/ttf/IRANSansWeb(FaNum)_Light.ttf') format("truetype");
+  font-style: normal
 }
 
 @font-face {
-    font-family: IRANSans;
-    font-weight: 100;
-    src: url('/assets/fonts/eot/IRANSansWeb(FaNum)_UltraLight.eot');
-    src: local("?"), url('/assets/fonts/woff/IRANSansWeb(FaNum)_UltraLight.woff') format("woff"), url('/assets/fonts/ttf/IRANSansWeb(FaNum)_UltraLight.ttf') format("truetype");
-    font-style: normal
+  font-family: IRANSans;
+  font-weight: 100;
+  src: url('/assets/fonts/eot/IRANSansWeb(FaNum)_UltraLight.eot');
+  src: local("?"), url('/assets/fonts/woff/IRANSansWeb(FaNum)_UltraLight.woff') format("woff"), url('/assets/fonts/ttf/IRANSansWeb(FaNum)_UltraLight.ttf') format("truetype");
+  font-style: normal
 }
 
 @font-face {
-    font-family: IRANSans;
-    font-weight: 400;
-    src: url('/assets/fonts/eot/IRANSansWeb(FaNum).eot');
-    src: local("?"), url('/assets/fonts/woff/IRANSansWeb(FaNum).woff') format("woff"), url('/assets/fonts/ttf/IRANSansWeb(FaNum).ttf') format("truetype");
-    font-style: normal
+  font-family: IRANSans;
+  font-weight: 400;
+  src: url('/assets/fonts/eot/IRANSansWeb(FaNum).eot');
+  src: local("?"), url('/assets/fonts/woff/IRANSansWeb(FaNum).woff') format("woff"), url('/assets/fonts/ttf/IRANSansWeb(FaNum).ttf') format("truetype");
+  font-style: normal
 }
 
 
 html,
 body {
-    height: 100%;
-    background-color: rgb(174, 175, 177);
+  height: 100%;
+  background-color: rgb(174, 175, 177);
 
 }
 
 body {
-    margin: 0;
-    direction: rtl;
+  margin: 0;
+  direction: rtl;
 }
-
 
 
 
 .mat-drawer.test {
-    transform: translate3d(+100%, 0, 0);
+  transform: translate3d(+100%, 0, 0);
 }
+
 
 
 .mat-paginator-icon {
-    transform: rotate(180deg);
-    width: 28px;
-    fill: currentColor
+  transform: rotate(180deg);
+  width: 28px;
+  fill: currentColor
 }
 
 button.mat-menu-item {
-    text-align: right;
+  text-align: right;
 }
 
 dp-date-picker.dp-material .dp-picker-input {
-    text-align: left;
+  text-align: left;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.dialogBox {
+  mat-dialog-container {
+    width: 400px;
+    height: 500px;
+    background-color: rgb(255, 242, 56);
+    border-radius: 6px;
+  }
 }

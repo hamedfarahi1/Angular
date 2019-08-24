@@ -13,6 +13,7 @@ export interface TableData {
       icon?: string
     }
   };
+  rate?: boolean;
 }
 
 export interface TableService {

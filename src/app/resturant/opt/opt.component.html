@@ -1,24 +1,182 @@
 <div style="width:40% ;height: 50%; margin: auto; margin-top: 10%">
-  <div style="display: inline-grid;margin-right: 20%;">
+  <formio [form]='{
+    "components": [
+        {
+            "label": "name",
+            "allowMultipleMasks": false,
+            "showWordCount": false,
+            "showCharCount": false,
+            "tableView": true,
+            "alwaysEnabled": false,
+            "type": "textfield",
+            "input": true,
+            "key": "name",
+            "defaultValue": "",
+            "validate": {
+                "required": true,
+                "customMessage": "",
+                "json": ""
+            },
+            "conditional": {
+                "show": "",
+                "when": "",
+                "json": ""
+            },
+            "widget": {
+                "type": ""
+            },
+            "inputFormat": "plain",
+            "encrypted": false,
+            "properties": {},
+            "reorder": false,
+            "customConditional": "",
+            "logic": []
+        },
+        {
+            "label": "family",
+            "allowMultipleMasks": false,
+            "showWordCount": false,
+            "showCharCount": false,
+            "tableView": true,
+            "alwaysEnabled": false,
+            "type": "textfield",
+            "input": true,
+            "key": "family",
+            "defaultValue": "",
+            "validate": {
+                "required": true,
+                "customMessage": "",
+                "json": ""
+            },
+            "conditional": {
+                "show": "",
+                "when": "",
+                "json": ""
+            },
+            "properties": {},
+            "inputFormat": "plain",
+            "encrypted": false,
+            "customConditional": "",
+            "logic": [],
+            "widget": {
+                "type": ""
+            },
+            "reorder": false
+        },
+        {
+            "label": "salary",
+            "allowMultipleMasks": false,
+            "showWordCount": false,
+            "showCharCount": false,
+            "tableView": true,
+            "alwaysEnabled": false,
+            "type": "textfield",
+            "input": true,
+            "key": "salary",
+            "defaultValue": "",
+            "validate": {
+                "required": true,
+                "pattern": "^[0-9]*$",
+                "customMessage": "",
+                "json": ""
+            },
+            "conditional": {
+                "show": "",
+                "when": "",
+                "json": ""
+            },
+            "widget": {
+                "type": ""
+            },
+            "properties": {},
+            "reorder": false,
+            "inputFormat": "plain",
+            "encrypted": false,
+            "customConditional": "",
+            "logic": []
+        },
+        {
+            "label": "Date / Time",
+            "mask": false,
+            "tableView": true,
+            "alwaysEnabled": false,
+            "type": "datetime",
+            "input": true,
+            "key": "time",
+            "suffix": true,
+            "defaultValue": "",
+            "widget": {
+                "type": "calendar",
+                "displayInTimezone": "viewer",
+                "language": "en",
+                "useLocaleSettings": false,
+                "allowInput": true,
+                "mode": "single",
+                "enableTime": true,
+                "noCalendar": false,
+                "format": "yyyy-MM-dd hh:mm a",
+                "defaultDate": "",
+                "hourIncrement": 1,
+                "minuteIncrement": 1,
+                "time_24hr": false,
+                "minDate": "",
+                "maxDate": ""
+            },
+            "validate": {
+                "customMessage": "",
+                "json": ""
+            },
+            "conditional": {
+                "show": "",
+                "when": "",
+                "json": ""
+            },
+            "datePicker": {
+                "minDate": "",
+                "maxDate": ""
+            },
+            "properties": {},
+            "tags": [],
+            "reorder": false,
+            "encrypted": false,
+            "customConditional": "",
+            "logic": []
+        },
+        {
+            "type": "button",
+            "label": "Submit",
+            "key": "submit",
+            "disableOnInvalid": true,
+            "theme": "primary",
+            "input": true,
+            "tableView": true
+        }
+    ]
+}' (submit)="onSubmit($event.data)"></formio>
+
+  <!-- <div [formGroup]="personForm" style="display: grid;margin-right: 20%;">
     <mat-form-field class="full-width">
-      <input [(ngModel)]="person.name" type="text" matInput placeholder="نام">
+      <input formControlName="name" type="text" matInput placeholder="نام">
     </mat-form-field>
     <mat-form-field class="full-width">
-      <input [(ngModel)]="person.family" type="text" matInput placeholder="نام خانوادگی">
+      <input formControlName="family" type="text" matInput placeholder="نام خانوادگی">
     </mat-form-field>
     <mat-form-field class="full-width">
-      <input appNumberInput [(ngModel)]="person.salary" type="text" matInput placeholder="حقوق ماهیانه ">
+      <input appNumberInput formControlName="salary" type="text" matInput placeholder="حقوق ماهیانه ">
     </mat-form-field>
 
     <div *ngIf="!detail" style="margin-top: 20px">
-      <dp-date-picker dir="ltr" [(ngModel)]="dateObject" mode="daytime" placeholder="تاریخ" theme="dp-material">
+      <dp-date-picker dir="ltr" formControlName="time" mode="day" placeholder="تاریخ" theme="dp-material">
       </dp-date-picker>
     </div>
 
-    <div *ngIf="!detail" style="margin-top:20px; display: flex">
-      <button style="min-width: 38%;" mat-raised-button (click)="submit()">
+    <div style="margin-top:30px; display: flex">
+      <button [disabled]="!personForm.valid" style="min-width: 38%;" mat-raised-button (click)="submit()">
         تایید
       </button>
+      <button mat-raised-button style="min-width: 38%; margin-right: 80px" (click)="back()">
+        بازگشت
+      </button>
     </div>
-  </div>
+  </div> -->
 </div>

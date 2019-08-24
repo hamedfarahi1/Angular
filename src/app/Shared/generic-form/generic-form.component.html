@@ -1,0 +1,66 @@
+<div style="width:30% ;min-width: 200px; margin: auto">
+  <div novalidate [formGroup]="myForm">
+
+    <ng-container *ngFor=" let field of fields">
+
+      <div *ngIf="field.formType == 'text'">
+        <mat-form-field class="full-width">
+          <input matInput type="text" [id]="field.name" [formControl]="myForm.get(field.name)"
+            placeholder="{{field.title}}" />
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="field.formType == 'number'">
+        <mat-form-field class="full-width">
+          <input matInput type="number" [id]="field.name" [formControl]="myForm.get(field.name)"
+            placeholder="{{field.title}}" />
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="field.formType == 'checkbox'">
+        <mat-checkbox [id]="field.name" [formControl]="myForm.get(field.name)">{{field.title}}</mat-checkbox>
+      </div>
+
+      <div *ngIf="field.formType == 'selectKey'">
+        <mat-form-field class="full-width">
+          <mat-label>{{field.title}}</mat-label>
+          <mat-select [formControl]="myForm.get(field.name)">
+            <mat-option *ngFor="let lookup of field.lookups" [value]="lookup.key">
+              {{lookup.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="field.formType == 'selectKeyValue'">
+        <mat-form-field class="full-width">
+          <mat-label>{{field.title}}</mat-label>
+          <mat-select [formControl]="myForm.get(field.name)">
+            <mat-option *ngFor="let lookup of field.lookups" [value]="lookup">
+              {{lookup.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="field.formType == 'multiSelectKey'">
+        <mat-form-field class="full-width">
+          <mat-label>{{field.title}}</mat-label>
+          <mat-select [formControl]="myForm.get(field.name)" multiple>
+            <mat-option *ngFor="let lookup of field.lookups" [value]="lookup.key">
+              {{lookup.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="field.formType == 'date'">
+        <dp-date-picker dir="ltr" [formControl]="myForm.get(field.name)" mode="daytime" placeholder="{{field.title}}"
+          theme="dp-material" style="width: 100%">
+        </dp-date-picker>
+      </div>
+
+
+    </ng-container>
+    <button [disabled]="!myForm.valid" matRaisedButton (click)="sub()">create</button>
+  </div>
+
+</div>

@@ -19,8 +19,8 @@
       add
     </mat-icon>
   </button>
-  <button *ngIf="tableData.actions.other" mat-raised-button style="align-self: center; margin-right: 20px"
-    [routerLink]="[tableData.actions.other.link]">
+  <button [disabled]="true" *ngIf="tableData.actions.other" mat-raised-button
+    style="align-self: center; margin-right: 20px" [routerLink]="[tableData.actions.other.link]">
     <mat-icon *ngIf="tableData.actions.other.icon" aria-hidden="false" style="align-self: normal">
       {{tableData.actions.other.icon}}
     </mat-icon>

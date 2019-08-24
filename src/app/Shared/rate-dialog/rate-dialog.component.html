@@ -1,0 +1,12 @@
+<div style="text-align:center;">
+  <img src="{{imgSrc}}"
+    style="width: 150px;height: 150px; opacity: 100%;;margin-top: 50px;opacity: 50%; transition: 2s " />
+  <div style="margin-right: 18px">
+    <star-rating style="direction: rtl" value="0" checkedcolor="red" uncheckedcolor="white" size="64px" readonly="false"
+      (rate)="onRate($event)" (mouseover)="onHover($event)" (mouseout)="imgSrc=defaultImg">
+    </star-rating>
+  </div>
+  <button mat-raised-button style="margin-top: 60px" (click)="exit()">
+    خروج
+  </button>
+</div>

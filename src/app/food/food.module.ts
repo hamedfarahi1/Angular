@@ -8,12 +8,14 @@ import { FoodRoutingModule } from './food-routing.module';
 import { FoodMenuComponent } from './food-menu/food-menu.component';
 import { FormsModule } from '@angular/forms';
 import { GalleryComponent } from './gallery/gallery.component';
+import { FoodCreateComponent } from './food-create/food-create.component';
 
 @NgModule({
     declarations: [
         OptionsComponent,
         FoodMenuComponent,
-        GalleryComponent
+        GalleryComponent,
+        FoodCreateComponent
     ],
     providers: [FormData],
     imports: [CommonModule, FoodRoutingModule, SharedModule, MenuModule, FormsModule],

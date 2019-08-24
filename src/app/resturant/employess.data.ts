@@ -2,7 +2,6 @@ import { KeyValue } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { TableService } from '../menu/table';
-import { EmployeesSh } from './employess.sh';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,91 +13,104 @@ export class EmployeesData implements TableService {
         name: 'حامد',
         family: 'فرحی',
         salary: '16000',
-        time: '2014-07-15T17:14:31+04:30'
+        time: '2014-07-15T17:14:31+04:30',
+        rate: 1
       },
       {
         id: 2,
         name: 'رضا',
         family: 'عباسی',
         salary: '18000',
-        time: '2019-07-15T17:14:31+04:30'
+        time: '2019-07-15T17:14:31+04:30',
+        rate: 5
       },
       {
         id: 3,
         name: 'مهدی',
         family: 'کاسه آتشین',
         salary: '22000',
-        time: '2019-07-07T17:14:31+04:30'
+        time: '2019-07-07T17:14:31+04:30',
+        rate: 3
       },
       {
         id: 4,
         name: 'فرزاد',
         family: 'فقیه',
         salary: '16000',
-        time: '2018-07-15T17:14:31+04:30'
+        time: '2018-07-15T17:14:31+04:30',
+        rate: 3
       },
       {
         id: 5,
         name: 'فرهاد',
         family: 'رضایی',
         salary: '62100',
-        time: '2016-07-15T17:14:31+04:30'
+        time: '2016-07-15T17:14:31+04:30',
+        rate: 4
       },
       {
         id: 6,
         name: 'شاهین',
         family: 'رضایی',
         salary: '62100',
-        time: '2016-07-15T17:14:31+04:30'
+        time: '2016-07-15T17:14:31+04:30',
+        rate: 5
       },
       {
         id: 7,
         name: 'سجاد',
         family: 'مشهدی',
         salary: '62100',
-        time: '2016-07-15T17:14:31+04:30'
+        time: '2016-07-15T17:14:31+04:30',
+        rate: 2
       },
       {
         id: 8,
         name: 'صابر',
         family: 'جمشیدی',
         salary: '62100',
-        time: '2016-07-15T17:14:31+04:30'
+        time: '2016-07-15T17:14:31+04:30',
+        rate: 3
       },
       {
         id: 9,
         name: 'کاوه',
         family: 'شاهدی',
         salary: '62100',
-        time: '2016-07-15T17:14:31+04:30'
+        time: '2016-07-15T17:14:31+04:30',
+        rate: 4
       },
       {
         id: 10,
         name: 'صالح',
         family: 'قربانی',
         salary: '62100',
-        time: '2016-07-15T17:14:31+04:30'
+        time: '2016-07-15T17:14:31+04:30',
+        rate: 3
       },
       {
         id: 11,
         name: 'امیر',
         family: 'اقبالی',
         salary: '62100',
-        time: '2016-07-15T17:14:31+04:30'
+        time: '2016-07-15T17:14:31+04:30',
+        rate: 1
       },
       {
         id: 12,
         name: 'کاظم',
         family: 'محمدی',
         salary: '62100',
-        time: '2016-07-15T17:14:31+04:30'
+        time: '2016-07-15T17:14:31+04:30',
+        rate: 1
       },
       {
         id: 13,
         name: 'نصرت',
         family: 'فکوری',
         salary: '62100',
-        time: '2016-07-15T17:14:31+04:30'
+        time: '2016-07-15T17:14:31+04:30',
+        rate: 2
       }
     ],
     count: 13
@@ -153,7 +165,7 @@ export class EmployeesData implements TableService {
   }
 
   getDetail(id) {
-    let person = {} as EmployeesSh;
+    let person = {};
     for (const elm of this.data.menu) {
       if (elm.id === +id) {
         person = elm;
@@ -162,15 +174,21 @@ export class EmployeesData implements TableService {
     return of(person);
   }
   update(person) {
-    for (let elm of this.data.menu) {
+    let i = 0;
+    for (const elm of this.data.menu) {
       console.log(typeof elm.id + typeof person.id);
       if (elm.id === person.id) {
-        elm = person;
+        this.data.menu[i] = person;
+        this.data.menu[i].time = person.time.locale('en').format();
+        console.log(person);
+        console.log(this.data.menu);
       }
+      i++;
     }
     return of({ report: 'Seccess' });
   }
   create(person) {
+    // person.time = person.time.locale('en').format();
     this.data.menu.push(person);
     this.data.count++;
     return of({ report: 'added' });

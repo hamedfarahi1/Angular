@@ -58,6 +58,7 @@ export class TableHmdComponent implements OnInit, AfterViewInit {
       this.col.push(ele.field);
     }
     if (this.tableData1.actions.action) { this.col.push('actions'); }
+    if (this.tableData1.rate) { this.col.push('rate'); }
     const res: KeyValue<string, string>[] = [];
     this.pager.pageSize = 3;
     this.route.queryParams.subscribe(params => {
@@ -120,7 +121,7 @@ export class TableHmdComponent implements OnInit, AfterViewInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '400px';
-    dialogConfig.height = '200px';
+    dialogConfig.height = '800px';
     const dialogRef = this.dialog.open(DeleteComponent, dialogConfig);
     dialogRef.componentInstance.data = { data: value, service: this.service };
     dialogRef.afterClosed().subscribe(data => {

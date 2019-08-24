@@ -1,9 +1,11 @@
+import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'jalali-moment';
+import { ToastrService } from 'ngx-toastr';
 import { FoodDetail } from '../food-detail';
 import { FoodService } from '../food-service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import * as moment from 'jalali-moment';
 
 
 @Component({
@@ -12,23 +14,30 @@ import * as moment from 'jalali-moment';
     styleUrls: ['./options.component.scss']
 })
 export class OptionsComponent implements OnInit {
-
+    foodForm = this.fb.group({
+        dateObject: [moment()],
+        id: [Validators.required],
+        type: [],
+        name: ['', Validators.required],
+        price: ['', Validators.required],
+        image: [File]
+    });
     types: any;
     food: FoodDetail;
     formData: FormData = new FormData();
-    dateObject = moment();
     constructor(
         private route: ActivatedRoute,
         private toastr: ToastrService,
         private foodService: FoodService,
         private router: Router,
+        private fb: FormBuilder,
+        private location: Location
     ) { }
 
     ngOnInit() {
         this.formData = new FormData();
         let path: string;
         this.food = {} as FoodDetail;
-        this.dateObject = moment();
         this.route.url.subscribe(param => {
             path = param[1].path;
         });
@@ -36,7 +45,9 @@ export class OptionsComponent implements OnInit {
         if (path !== 'create') {
             this.route.params.subscribe(params => {
                 this.foodService.getDetail(params.id).subscribe(res => {
-                    this.food = res;
+                    // tslint:disable-next-line:no-string-literal
+                    res['dateObject'] = moment(res['dateObject'], 'YYYY-MM-DD-hh-mm-ss');
+                    this.foodForm.patchValue(res);
                 });
             });
         }
@@ -49,6 +60,9 @@ export class OptionsComponent implements OnInit {
             this.createFoodInfo();
         }
     }
+    back() {
+        this.location.back();
+    }
     updateFoodInfo() {
         this.foodService.update(this.food).subscribe(res => {
             this.toastr.success('Updated', 'Update Message');
@@ -57,10 +71,10 @@ export class OptionsComponent implements OnInit {
     }
 
     createFoodInfo() {
-        this.formData.append('name', this.food.name);
-        this.formData.append('price', this.food.price);
-        this.formData.append('type', this.food.type + '');
-        this.formData.append('dataObject', this.dateObject.format());
+        this.formData.append('name', this.foodForm.get('name').value);
+        this.formData.append('price', this.foodForm.get('price').value);
+        this.formData.append('type', this.foodForm.get('type').value + '');
+        this.formData.append('dataObject', this.foodForm.get('dateObject').value.format());
         this.foodService.create(this.formData).subscribe(res => {
             this.router.navigate(['food']);
         });
@@ -76,4 +90,7 @@ export class OptionsComponent implements OnInit {
         reader.readAsDataURL(file);
     }
 
+    onSubmit(event: any) {
+        console.log(event);
+    }
 }

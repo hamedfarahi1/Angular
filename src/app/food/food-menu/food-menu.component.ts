@@ -44,7 +44,7 @@ export class FoodMenuComponent implements OnInit {
                         field: 'time',
                         label: 'تاریخ ثبت',
                         type: 'time',
-                        format: 'jYYYY/jM/jD'
+                        format: 'jYYYY/jMM/jDD'
                     }
                 ],
                 actions: {
@@ -54,7 +54,8 @@ export class FoodMenuComponent implements OnInit {
                         link: './gallery',
                         icon: 'photo'
                     }
-                }
+                },
+                rate: true
 
             };
         }
